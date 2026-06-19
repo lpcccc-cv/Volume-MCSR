@@ -426,11 +426,9 @@ class MV_LKAN(nn.Module):
 
         ######### stage I ###########
         #### REFN for input feature extraction
-        L1_fea = self.conv_first(x.view(-1, C, H, W))
-        L1_fea = self.feature_extraction_RFEN(L1_fea)
+        L1_fea = self.feature_extraction_RFEN(self.conv_first(x.view(-1, C, H, W)))
         #### CMS for reference feature extraction
-        ref_fea = self.conv_first_ref(y.view(-1, c, h, w))
-        ref_fea = self.CMS(ref_fea)
+        ref_fea = self.CMS(self.conv_first_ref(y.view(-1, c, h, w)))
         rec_ref = self.rec_ref(ref_fea)
         rec_ref = self.select_generate_slices(rec_ref.view(b, n, -1, h, w), scale = self.scale)
         
