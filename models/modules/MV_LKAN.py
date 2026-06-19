@@ -396,9 +396,8 @@ class MV_LKAN(nn.Module):
         self.conv_first = nn.Conv2d(input_channel, nf, 3, 1, 1, bias=True)
         self.feature_extraction_RFEN = mutil.make_layer(ResidualBlock_noBN_f, 5)
 
-        ResidualBlock_noBN_f_ref = functools.partial(mutil.ResidualBlock_noBN, nf=nf)
         self.conv_first_ref = nn.Conv2d(input_channel, nf, 3, 1, 1, bias=True)
-        self.CMS = mutil.make_layer(ResidualBlock_noBN_f_ref, 10)
+        self.CMS = CMS()
         self.rec_ref = nn.Conv2d(64, 1, 3, 1, 1, bias=True)
 
         self.HRconv1 = nn.Conv2d(64, 64, 3, 1, 1, bias=True)
